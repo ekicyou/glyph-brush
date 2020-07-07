@@ -1,0 +1,54 @@
+@startuml
+
+
+object ttf_parser
+object owned_ttf_parser
+ttf_parser    ..* owned_ttf_parser
+
+object ab_glyph_rasterizer
+object ab_glyph
+ab_glyph_rasterizer ..* ab_glyph
+owned_ttf_parser    ..* ab_glyph
+
+object glyph_brush_layout
+object glyph_brush_draw_cache
+ab_glyph ..* glyph_brush_layout
+ab_glyph ..* glyph_brush_draw_cache
+
+object glyph_brush
+glyph_brush_draw_cache ..* glyph_brush
+glyph_brush_layout ..* glyph_brush
+glyph_brush_layout ..* glyph_brush_draw_cache
+
+object gfx_glyph
+object wgpu_glyph
+glyph_brush ..* gfx_glyph
+glyph_brush ..* wgpu_glyph
+
+object gfx
+object gfx_core
+gfx      ..* gfx_glyph 
+gfx_core ..* gfx_glyph
+
+object wgpu
+wgpu ..* wgpu_glyph
+
+object wgpu_core   
+object wgpu_native 
+object wgpu_types  
+wgpu_core   ..* wgpu
+wgpu_native ..* wgpu
+wgpu_types  ..* wgpu
+
+object iced_wgpu
+glyph_brush ..* iced_wgpu
+wgpu        ..* iced_wgpu
+wgpu_glyph  ..* iced_wgpu
+
+object iced
+iced_wgpu ..* iced
+
+
+
+
+@enduml
