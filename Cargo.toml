@@ -1,2 +1,7 @@
 [workspace]
 members = ["gfx-glyph", "glyph-brush", "layout", "draw-cache"]
+
+[patch.crates-io]
+ab_glyph = { git = "https://github.com/tuguna/ab-glyph", branch = "feature/vertical" }
+
+# cargo run -p gfx_glyph --example kanji --release
